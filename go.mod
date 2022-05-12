@@ -1,4 +1,4 @@
-module github.com/thanasolykos/test_terraform_flugel_test1
+module github.com/thanasolykos/terratest_playground
 
 go 1.18
 
