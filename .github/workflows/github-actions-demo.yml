@@ -1,7 +1,7 @@
 name: GitHub Actions Demo
 on: [push]
 jobs:
-	Build-Go:
+	build-go:
 		runs-on: ubuntu-latest
 		steps:
 			- name: Setup Go
