@@ -11,7 +11,7 @@ resource "aws_subnet" "sbnt1" {
   vpc_id                  = "${aws_vpc.main.id}"
   cidr_block             = "10.10.0.0/24"
   availability_zone = "us-east-2a"
-#  map_public_ip_on_launch = true
+  map_public_ip_on_launch = true
   tags = {
     Name = "LB"
   }
@@ -21,21 +21,21 @@ resource "aws_subnet" "sbnt2" {
   vpc_id                  = "${aws_vpc.main.id}"
   cidr_block             = "10.10.1.0/24"
   availability_zone = "us-east-2b"
-#  map_public_ip_on_launch = true
+  map_public_ip_on_launch = true
   tags = {
     Name = "LB"
   }
 }
 
-resource "aws_subnet" "sbnt_pub" {
-  vpc_id                  = "${aws_vpc.main.id}"
-  cidr_block             = "10.10.10.0/24"
-  availability_zone = "us-east-2a"
-  map_public_ip_on_launch = true
-  tags = {
-    Name = "Public"
-  }
-}
+#resource "aws_subnet" "sbnt_pub" {
+#  vpc_id                  = "${aws_vpc.main.id}"
+#  cidr_block             = "10.10.10.0/24"
+#  availability_zone = "us-east-2a"
+#  map_public_ip_on_launch = true
+#  tags = {
+#    Name = "Public"
+#  }
+#}
 
 resource "aws_internet_gateway" "my_ig" {
   vpc_id = aws_vpc.main.id
@@ -97,42 +97,42 @@ resource "aws_security_group" "lb_sg" {
 }
 
 
-resource "aws_lb" "nginx" {
-  name               = "test-lb-tf"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.lb_sg.id]
-  subnets            = [aws_subnet.sbnt1.id, aws_subnet.sbnt2.id]
-
-#  enable_deletion_protection = true
+#resource "aws_lb" "nginx" {
+#  name               = "test-lb-tf"
+#  internal           = false
+#  load_balancer_type = "application"
+#  security_groups    = [aws_security_group.lb_sg.id]
+#  subnets            = [aws_subnet.sbnt1.id, aws_subnet.sbnt2.id]
 #
-#  access_logs {
-#    bucket  = aws_s3_bucket.lb_logs.bucket
-#    prefix  = "test-lb"
-#    enabled = true
+##  enable_deletion_protection = true
+##
+##  access_logs {
+##    bucket  = aws_s3_bucket.lb_logs.bucket
+##    prefix  = "test-lb"
+##    enabled = true
+##  }
+#
+#  tags = {
+#    Environment = "dev"
 #  }
-
-  tags = {
-    Environment = "dev"
-  }
-}
-
-resource "aws_lb_target_group" "lb_tg" {
-  name        = "tf-lb-tg"
-  port        = 80
-  protocol    = "HTTP"
-  vpc_id      = aws_vpc.main.id
-}
-
-resource "aws_lb_listener" "front_end" {
-  load_balancer_arn = aws_lb.nginx.arn
-  port              = "25270"
-  protocol          = "HTTP"
-#  ssl_policy        = "ELBSecurityPolicy-2016-08"
-#  certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.lb_tg.arn
-  }
-}
+#}
+#
+#resource "aws_lb_target_group" "lb_tg" {
+#  name        = "tf-lb-tg"
+#  port        = 80
+#  protocol    = "HTTP"
+#  vpc_id      = aws_vpc.main.id
+#}
+#
+#resource "aws_lb_listener" "front_end" {
+#  load_balancer_arn = aws_lb.nginx.arn
+#  port              = "25270"
+#  protocol          = "HTTP"
+##  ssl_policy        = "ELBSecurityPolicy-2016-08"
+##  certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
+#
+#  default_action {
+#    type             = "forward"
+#    target_group_arn = aws_lb_target_group.lb_tg.arn
+#  }
+#}
