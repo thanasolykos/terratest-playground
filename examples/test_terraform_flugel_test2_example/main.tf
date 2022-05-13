@@ -25,8 +25,14 @@ resource "aws_instance" "nano" {
   }
 
   provisioner "file" {
-    source      = "test.sh"  # put the content directly here and run it in inline below
-    destination = "/tmp/test.sh"
+    content     = <<EOT
+    #!/usr/bin/python
+    lines = ["Tags of the instance:\n", "Name: ${self.tags.Name}\n", "Owner: ${self.tags.Owner}"]
+    file1 = open("index.html", "w")
+    file1.writelines(lines)
+    file1.close
+    EOT
+    destination = "/home/ec2-user/startup_helper.py"
 
     connection {
       type        = "ssh"
@@ -42,7 +48,8 @@ resource "aws_instance" "nano" {
     inline = [
       "sudo amazon-linux-extras enable python3.8",
       "sudo yum clean metadata && sudo yum -y install python38",
-      "/tmp/test.sh"
+      "chmod +x /home/ec2-user/startup_helper.py",
+      "/home/ec2-user/startup_helper.py"
     ]
 
     connection {

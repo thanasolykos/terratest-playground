@@ -22,7 +22,7 @@ func TestTerraformFlugelTest1Example(t *testing.T) {
 	}
 
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-		TerraformDir: "examples/test_terraform_flugel_test1_example",
+		TerraformDir: "examples/test_terraform_flugel_test2_example",
 
 		// Variables   to pass to our Terraform code using -var options
 		Vars: map[string]interface{}{
@@ -46,6 +46,5 @@ func TestTerraformFlugelTest1Example(t *testing.T) {
 
 	assert.Equal(t, expectedTags, actualS3BucketTags)
 	assert.Equal(t, expectedTags, actualEC2InstanceTags)
-
 
 }
