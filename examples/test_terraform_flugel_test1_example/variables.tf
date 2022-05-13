@@ -9,3 +9,9 @@ variable "tag_owner" {
   type        = string
   default     = "InfraTem"
 }
+
+variable "key_name" {
+  description = "EC2 instace key pair."
+  type        = string
+  default     = "my_precious"
+}
