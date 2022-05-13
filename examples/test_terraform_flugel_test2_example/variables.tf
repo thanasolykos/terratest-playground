@@ -1,13 +1,13 @@
 variable "tag_name" {
   description = "Name for the tag in resources."
   type        = string
-  default     = "Flugl"
+  default     = "Terraform"
 }
 
 variable "tag_owner" {
   description = "Owner for the tag in resources."
   type        = string
-  default     = "InfraTem"
+  default     = "Terraform"
 }
 
 variable "key_name" {
