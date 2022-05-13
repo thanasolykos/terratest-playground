@@ -15,3 +15,8 @@ variable "key_name" {
   type        = string
   default     = "my_precious"
 }
+
+variable "vpc_id" {
+  type = string
+  default = "zzzzz"
+}
