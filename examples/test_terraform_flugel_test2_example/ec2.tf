@@ -26,7 +26,7 @@ import json
 #file1 = open("index.html", "w")
 #file1.writelines(lines)
 #output = json.dumps({"Instance" : ${count.index}, "Name" : ${var.tag_name}, "Owner" : ${var.tag_owner}})
-output = json.dumps({"Name" : "${var.tag_name}", "Owner" : "${var.tag_owner}"})
+output = "Name : ${var.tag_name}, Owner : ${var.tag_owner}"
 file1 = open("index.html", "w")
 file1.write(output)
 file1.close' > /home/ec2-user/startup_helper.py

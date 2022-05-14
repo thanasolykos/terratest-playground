@@ -10,18 +10,11 @@ import (
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-func TestTerraformFlugelTest1Example(t *testing.T) {
+func TestTerraformFlugelTest2Example(t *testing.T) {
 	t.Parallel()
 
-	//awsRegion := "us-east-2"
 	expectedName := "Flugel"
 	expectedOwner := "InfraTeam"
-
-	// Set up expected values to be checked later
-	//expectedTags := map[string]string{
-	//	"Name":  "Flugel",
-	//	"Owner": "InfraTeam",
-	//}
 
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		TerraformDir: "examples/test_terraform_flugel_test2_example",
@@ -34,20 +27,12 @@ func TestTerraformFlugelTest1Example(t *testing.T) {
 	})
 
 	// At the end of the test, run `terraform destroy` to clean up any resources that were created
-	//defer terraform.Destroy(t, terraformOptions)
+	defer terraform.Destroy(t, terraformOptions)
 
-	//terraform.InitAndApply(t, terraformOptions)
-
-	//bucketID := terraform.Output(t, terraformOptions, "bucket_id")
-	//instanceID := terraform.Output(t, terraformOptions, "instance_id")
-
-	//actualS3BucketTags := aws.GetS3BucketTags(t, awsRegion, bucketID)
-	//actualEC2InstanceTags := aws.GetTagsForEc2Instance(t, awsRegion, instanceID)
-	//assert.Equal(t, expectedTags, actualS3BucketTags)
-	//assert.Equal(t, expectedTags, actualEC2InstanceTags)
+	terraform.InitAndApply(t, terraformOptions)
 
 	// Specify the text the EC2 Instance will return when we make HTTP requests to it.
-	instanceText := fmt.Sprintf("{\"Name\" : %s, \"Owner\" : %s}", expectedName, expectedOwner)
+	instanceText := fmt.Sprintf("Name : %s, Owner : %s", expectedName, expectedOwner)
 
 	// Run `terraform output` to get the value of an output variable
 	instanceURL := terraform.Output(t, terraformOptions, "alb_url")
