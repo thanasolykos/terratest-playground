@@ -41,8 +41,8 @@ func TestTerraformFlugelTest2Example(t *testing.T) {
 	tlsConfig := tls.Config{}
 
 	// It can take a minute or so for the Instance to boot up, so retry a few times
-	maxRetries := 30
-	timeBetweenRetries := 5 * time.Second
+	maxRetries := 60
+	timeBetweenRetries := 10 * time.Second
 
 	// Verify that we get back a 200 OK with the expected instanceText
 	http_helper.HttpGetWithRetry(t, instanceURL, &tlsConfig, 200, instanceText, maxRetries, timeBetweenRetries)
