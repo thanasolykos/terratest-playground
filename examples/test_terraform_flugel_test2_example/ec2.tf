@@ -1,14 +1,14 @@
-resource "aws_key_pair" "my_key_pair" {
-  key_name   = var.key_name
-  public_key = file("${abspath(path.cwd)}/id.pub")
-}
+#resource "aws_key_pair" "my_key_pair" {
+#  key_name   = var.key_name
+#  public_key = file("${abspath(path.cwd)}/id.pub")
+#}
 
 resource "aws_instance" "nano" {
   count = 2
 
   ami           = "ami-0fe23c115c3ba9bac"
   instance_type = "t3a.nano"
-  key_name = aws_key_pair.my_key_pair.key_name
+#  key_name = aws_key_pair.my_key_pair.key_name
   vpc_security_group_ids = [aws_security_group.lb_sg.id]
   subnet_id = aws_subnet.sbnt1.id
 

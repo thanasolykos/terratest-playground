@@ -10,8 +10,8 @@ variable "tag_owner" {
   default     = "Terraform"
 }
 
-variable "key_name" {
-  description = "EC2 instace key pair."
-  type        = string
-  default     = "my_precious"
-}
+#variable "key_name" {
+#  description = "EC2 instace key pair."
+#  type        = string
+#  default     = "my_precious"
+#}
