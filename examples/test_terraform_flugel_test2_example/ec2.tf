@@ -21,9 +21,14 @@ resource "aws_instance" "nano" {
 sudo amazon-linux-extras enable python3.8
 sudo yum clean metadata && sudo yum -y install python38 && sudo amazon-linux-extras install -y nginx1 && sudo systemctl start nginx.service
 echo '#!/usr/bin/python
-lines = ["Tags of instance-${count.index}:\n", "Name: ${var.tag_name}\n", "Owner: ${var.tag_owner}"]
+import json
+#lines = ["Tags of instance-${count.index}:\n", "Name: ${var.tag_name}\n", "Owner: ${var.tag_owner}"]
+#file1 = open("index.html", "w")
+#file1.writelines(lines)
+#output = json.dumps({"Instance" : ${count.index}, "Name" : ${var.tag_name}, "Owner" : ${var.tag_owner}})
+output = json.dumps({"Name" : "${var.tag_name}", "Owner" : "${var.tag_owner}"})
 file1 = open("index.html", "w")
-file1.writelines(lines)
+file1.write(output)
 file1.close' > /home/ec2-user/startup_helper.py
 chmod +x /home/ec2-user/startup_helper.py
 /home/ec2-user/startup_helper.py
