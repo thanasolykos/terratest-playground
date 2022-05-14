@@ -91,7 +91,7 @@ resource "aws_security_group" "lb_sg" {
     from_port        = 80
     to_port          = 80
     protocol         = "tcp"
-    cidr_blocks      = ["141.237.65.33/32"]
+    cidr_blocks      = ["0.0.0.0/0"]
     security_groups = []
     self = "false"
     #    ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
