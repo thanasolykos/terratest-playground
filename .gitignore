@@ -2,3 +2,5 @@
 .vscode/
 *-workspace
 go*
+.terraform*
+terraform.tfstate*
